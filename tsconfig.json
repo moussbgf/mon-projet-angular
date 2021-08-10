@@ -16,6 +16,8 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    // permet de ne pas initaliser  appareils: any[];
+    // "strictPropertyInitialization": false,
     "lib": [
       "es2018",
       "dom"
