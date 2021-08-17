@@ -8,6 +8,8 @@
     *ngIf="appareilStatus==='éteint'"></div> -->
 
     <h4 [ngStyle]="{color: getColor()}">appareil : {{ appareilName }} -- statut : {{ getStatus() }}</h4>
+    <a [routerLink]="[id]">Détails</a>
+    
     <input type="text" class="form-control" [(ngModel)]="appareilName">
 
     <button class="btn btn-sm btn-success" *ngIf="appareilStatus === 'éteint'" (click)="onSwitch()">Allumer</button>

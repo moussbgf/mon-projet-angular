@@ -14,6 +14,8 @@ export class AppareilComponent implements OnInit {
   // appareilStatus = "éteint";
   @Input() appareilStatus!: string;
   @Input() index!: number;
+  @Input() id!: number;
+
 
   constructor(private appareilService: AppareilService) {
     // Initialisation obligatoir dans derniere version de typescript
