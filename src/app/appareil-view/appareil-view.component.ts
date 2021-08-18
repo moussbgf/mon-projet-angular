@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AppareilService } from '../services/appareil.service';
 
 @Component({
@@ -6,7 +7,7 @@ import { AppareilService } from '../services/appareil.service';
   templateUrl: './appareil-view.component.html',
   styleUrls: ['./appareil-view.component.scss']
 })
-export class AppareilViewComponent implements OnInit {
+export class AppareilViewComponent implements OnInit, OnDestroy {
 
   // interpolation (string simple). avec double accolade
   title = 'modification du title du fichier ts';
@@ -18,6 +19,7 @@ export class AppareilViewComponent implements OnInit {
   isAuth = false;
 
   appareils!: any[];
+  appareilSubscription!: Subscription;
 
   constructor(private appareilService: AppareilService) {
     // setTimeout(
@@ -28,8 +30,15 @@ export class AppareilViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appareils = this.appareilService.appareils;
+    // this.appareils = this.appareilService.appareils;
+    this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
+      (appareils: any[]) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.emitAppareilSubect();
   }
+  
 
 
   // event binding = html vers code. avec parenthese dans le html
@@ -68,5 +77,9 @@ export class AppareilViewComponent implements OnInit {
       }, 2000
     );
   });
+
+  ngOnDestroy() {
+    this.appareilSubscription.unsubscribe();
+  }
 
 }

@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 export class AppareilService {
 
     // propriété personalisée, et comunication avec autre component
@@ -5,8 +7,10 @@ export class AppareilService {
     // appareilTwo='TV';
     // appareilThree='Ordi';
 
+    // possible de créer une interface de appareils pour remplacer any[]
+    appareilSubject = new Subject<any[]>();
 
-    appareils = [
+    private appareils = [
         {
             id: 1,
             name: 'Maniche à laver',
@@ -24,32 +28,40 @@ export class AppareilService {
         }
     ];
 
+    emitAppareilSubect() {
+        this.appareilSubject.next(this.appareils.slice());
+    }
+
 
     switchOnAll() {
         for (let appareil of this.appareils) {
             appareil.status = 'allumé';
         }
+        this.emitAppareilSubect();
     }
 
     switchOffAll() {
         for (let appareil of this.appareils) {
             appareil.status = 'éteint';
         }
+        this.emitAppareilSubect();
     }
 
     switchOnOne(i: number) {
         this.appareils[i].status = 'allumé';
+        this.emitAppareilSubect();
     }
 
     switchOffOne(i: number) {
         this.appareils[i].status = 'éteint';
+        this.emitAppareilSubect();
     }
 
     getAppareilById(id: number) {
         const appareil = this.appareils.find(
-          (s) => {
-            return s.id === id;
-          }
+            (s) => {
+                return s.id === id;
+            }
         );
         return appareil;
     }
