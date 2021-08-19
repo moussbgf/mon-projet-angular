@@ -1,5 +1,11 @@
 import { Subject } from "rxjs";
 
+
+interface AppareilObject {
+    id: string;
+    name: string;
+    status: string;
+}
 export class AppareilService {
 
     // propriété personalisée, et comunication avec autre component
@@ -64,5 +70,18 @@ export class AppareilService {
             }
         );
         return appareil;
+    }
+
+    addAppareil(name: string, status: string) {
+        const appareilObject = {
+            id: 0,
+            name: '',
+            status: ''
+        };
+        appareilObject.name = name;
+        appareilObject.status = status;
+        appareilObject.id = this.appareils[(this.appareils.length - 1)].id + 1;
+        this.appareils.push(appareilObject);
+        this.emitAppareilSubect();
     }
 }
