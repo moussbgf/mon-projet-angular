@@ -6,7 +6,7 @@ import { AppareilService } from '../services/appareil.service';
   templateUrl: './appareil.component.html',
   styleUrls: ['./appareil.component.scss']
 })
-export class AppareilComponent implements OnInit {
+export class AppareilComponent {
 
   // property binding
   // appareilName = "machine à laver";
@@ -24,9 +24,6 @@ export class AppareilComponent implements OnInit {
 
     // @Input() appareilName!: string; le point d'exclamation permet d'éviter d'avoir à initaliser
 
-  }
-
-  ngOnInit(): void {
   }
 
   getStatus() {

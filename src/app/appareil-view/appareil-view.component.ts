@@ -36,6 +36,7 @@ export class AppareilViewComponent implements OnInit, OnDestroy {
         this.appareils = appareils;
       }
     );
+    this.appareilService.getAppareilsFromServer();
     this.appareilService.emitAppareilSubect();
   }
   
@@ -80,6 +81,15 @@ export class AppareilViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.appareilSubscription.unsubscribe();
+  }
+
+  onSave() {
+    this.appareilService.saveAppareilsToServer();
+    // this.appareilService.getAppareilsFromServer();
+  }
+
+  onFetch() {
+    this.appareilService.getAppareilsFromServer();
   }
 
 }
